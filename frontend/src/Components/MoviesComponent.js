@@ -4,30 +4,33 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import api from '../Services/Axios';
 import './MoviesComponent.css';
+import { MovieListComponent } from './MovieListComponent';
 
 export const MoviesComponent = ({movies, getMovies, setMovies}) => {
 
     const { id } = useParams();
     const [movieName, setMovieName] = useState();
+    const [language, setLanguage] = useState();
+    const [moviesCount, setMoviesCount] = useState(-1);
 
     useEffect(() =>{
         getMovies();
     }, [])
 
-    const deleteMovie = async (id) => {
+    const search = async () => {
         try{
-            const response = await api.delete(`api/v1/movies/${id}`);
-            getMovies();
+            const response = await api.get(`api/v1/movies/search/${movieName}`);
+            setMovies(response.data);
         }
         catch(err){
             console.log(err);
         }
     }
 
-    const search = async () => {
+    const count = async () => {
         try{
-            const response = await api.get(`api/v1/movies/search/${movieName}`);
-            setMovies(response.data);
+            const response = await api.get(`api/v1/movies/count/${language}`);
+            setMoviesCount(response.data);
         }
         catch(err){
             console.log(err);
@@ -40,53 +43,25 @@ export const MoviesComponent = ({movies, getMovies, setMovies}) => {
             <Col><h2>MOVIES LIST</h2></Col>
         </Row>
         <Row>
-            <Col><Button><Link className="link" to="/addMovie">Add Movie</Link></Button></Col>
             <Col>
-                <input placeholder="Search" onChange={(event)=>{setMovieName(event.target.value)}}/>
+                <input placeholder="Enter Language" onChange={(event)=>{setLanguage(event.target.value)}}/>
+                <Button onClick={() => {count()}}>Count</Button>
+                {moviesCount>=0 ? <h4> No. of movies found: {moviesCount} </h4> : <p/>}
+            </Col>
+            <Col>
+                <input placeholder="Search by Movie Name" onChange={(event)=>{setMovieName(event.target.value)}}/>
                 <Button onClick={() => {search()}}>Search</Button>
             </Col>
         </Row>
+        <Row>
+            <Col><Button><Link className="link" to="/addMovie">Add Movie</Link></Button>
+            {/* <Button><Link className="link" to="/filter">Filter</Link></Button> */}
+            </Col>
+            
+        </Row>
         <br></br>
         <Row><hr /></Row>
-        <Row className="mt-2">
-            <Col>
-            <Row>
-                <Col><h4>NAME</h4></Col>
-                <Col><h4>DIRECTOR</h4></Col>
-                <Col><h4>RELEASE YEAR</h4></Col>
-                <Col><h4>LANGUAGE</h4></Col>
-                <Col><h4>RATING</h4></Col>
-            </Row>
-                {
-                    movies?.map((movie) => {
-                        return(
-                            <div>
-                                <Row>
-                                <Col><hr /></Col>
-                                </Row>
-                                <Row>
-                                    <Col>{movie.name}</Col>
-                                    <Col>{movie.director}</Col>
-                                    <Col>{movie.release_year}</Col>
-                                    <Col>{movie.language}</Col>
-                                    <Col>{movie.rating}</Col>
-                                </Row>
-                                <br></br>
-                                <Row>
-                                    <Col><Button className="btn btn-success"><Link className="link" to={`/updateMovie/${movie.id}`}>Update</Link></Button> &nbsp;
-                                    <Button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</Button></Col>
-                                </Row>                               
-                            </div>
-                        )
-                    })
-                }
-            </Col>
-        </Row>
-        <Row>
-            <Col>
-                <hr />
-            </Col>
-        </Row>        
+        <MovieListComponent movies = {movies} getMovies = {getMovies} />      
     </Container>
   )
 }

@@ -4,5 +4,9 @@
 }
 
 input{
-    margin-right: 10px;
+    margin-right: 5px;
+}
+
+Button{
+    margin: 5px;
 }

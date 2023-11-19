@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import api from './Services/Axios';
 import { AddMovieComponent } from './Components/AddMovieComponent';
 import { UpdateMovieComponent } from './Components/UpdateMovieComponent';
+import { FilterComponent } from './Components/FilterComponent';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
           <Route path="/" element={<MoviesComponent movies={movies} getMovies={getMovies} setMovies={setMovies}/>}/>
           <Route path="/addMovie" element={<AddMovieComponent/>}/>
           <Route path = "/updateMovie/:id" element={<UpdateMovieComponent/>}/>
-          {/* <Route path = "/searchMovie/:" element={<SearchComponent/>} /> */}
+          {/* <Route path = "/filter" element={<FilterComponent movies={movies} getMovies={getMovies} setMovies={setMovies}/>} /> */}
         </Routes>
       </BrowserRouter>
     </div>
