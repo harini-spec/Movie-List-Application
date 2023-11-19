@@ -27,9 +27,10 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MoviesComponent movies={movies} getMovies={getMovies}/>}/>
+          <Route path="/" element={<MoviesComponent movies={movies} getMovies={getMovies} setMovies={setMovies}/>}/>
           <Route path="/addMovie" element={<AddMovieComponent/>}/>
           <Route path = "/updateMovie/:id" element={<UpdateMovieComponent/>}/>
+          {/* <Route path = "/searchMovie/:" element={<SearchComponent/>} /> */}
         </Routes>
       </BrowserRouter>
     </div>

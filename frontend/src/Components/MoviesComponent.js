@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 import api from '../Services/Axios';
 import './MoviesComponent.css';
 
-export const MoviesComponent = ({movies, getMovies}) => {
+export const MoviesComponent = ({movies, getMovies, setMovies}) => {
 
     const { id } = useParams();
+    const [movieName, setMovieName] = useState();
 
     useEffect(() =>{
         getMovies();
@@ -23,14 +24,39 @@ export const MoviesComponent = ({movies, getMovies}) => {
         }
     }
 
+    const search = async () => {
+        try{
+            const response = await api.get(`api/v1/movies/search/${movieName}`);
+            setMovies(response.data);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
   return (
     <Container>
         <Row>
-            <Col><h3>Movies List</h3></Col>
+            <Col><h2>MOVIES LIST</h2></Col>
         </Row>
-        <Row><Col><Button><Link className="link" to="/addMovie">Add Movie</Link></Button></Col></Row>
+        <Row>
+            <Col><Button><Link className="link" to="/addMovie">Add Movie</Link></Button></Col>
+            <Col>
+                <input placeholder="Search" onChange={(event)=>{setMovieName(event.target.value)}}/>
+                <Button onClick={() => {search()}}>Search</Button>
+            </Col>
+        </Row>
+        <br></br>
+        <Row><hr /></Row>
         <Row className="mt-2">
             <Col>
+            <Row>
+                <Col><h4>NAME</h4></Col>
+                <Col><h4>DIRECTOR</h4></Col>
+                <Col><h4>RELEASE YEAR</h4></Col>
+                <Col><h4>LANGUAGE</h4></Col>
+                <Col><h4>RATING</h4></Col>
+            </Row>
                 {
                     movies?.map((movie) => {
                         return(
@@ -44,8 +70,11 @@ export const MoviesComponent = ({movies, getMovies}) => {
                                     <Col>{movie.release_year}</Col>
                                     <Col>{movie.language}</Col>
                                     <Col>{movie.rating}</Col>
-                                    <Col><Button className="btn btn-success"><Link className="link" to={`/updateMovie/${movie.id}`}>Update</Link></Button></Col>
-                                    <Col><Button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</Button></Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <Col><Button className="btn btn-success"><Link className="link" to={`/updateMovie/${movie.id}`}>Update</Link></Button> &nbsp;
+                                    <Button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</Button></Col>
                                 </Row>                               
                             </div>
                         )
