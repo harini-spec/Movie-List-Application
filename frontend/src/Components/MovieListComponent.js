@@ -18,6 +18,7 @@ export const MovieListComponent = ({movies, getMovies}) => {
 
   return (
     <Container>
+            <Row><hr /></Row>
             <Row>
                 <Col><h4>NAME</h4></Col>
                 <Col><h4>DIRECTOR</h4></Col>

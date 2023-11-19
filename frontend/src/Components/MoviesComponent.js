@@ -60,7 +60,6 @@ export const MoviesComponent = ({movies, getMovies, setMovies}) => {
             
         </Row>
         <br></br>
-        <Row><hr /></Row>
         <MovieListComponent movies = {movies} getMovies = {getMovies} />      
     </Container>
   )
