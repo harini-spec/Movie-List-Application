@@ -79,7 +79,7 @@ export const UpdateMovieComponent = () => {
                                 onChange={(e)=>onInputChange(e)}/>
                             </div><br/>
 
-                            <button className='btn btn-primary'>Add</button>
+                            <button className='btn btn-primary'>Update</button>
                         </form>
                     </div>
             </div>
