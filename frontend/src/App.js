@@ -6,6 +6,7 @@ import { MoviesComponent } from './Components/MoviesComponent';
 import { useState, useEffect } from 'react';
 import api from './Services/Axios';
 import { AddMovieComponent } from './Components/AddMovieComponent';
+import { UpdateMovieComponent } from './Components/UpdateMovieComponent';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MoviesComponent movies={movies} getMovies={getMovies}/>}/>
           <Route path="/addMovie" element={<AddMovieComponent/>}/>
+          <Route path = "/updateMovie/:id" element={<UpdateMovieComponent/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -3,6 +3,7 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import api from '../Services/Axios';
+import './MoviesComponent.css';
 
 export const MoviesComponent = ({movies, getMovies}) => {
 
@@ -27,7 +28,7 @@ export const MoviesComponent = ({movies, getMovies}) => {
         <Row>
             <Col><h3>Movies List</h3></Col>
         </Row>
-        <Row><Col><Button><Link style={{color:"white", textDecoration: "none"}} to="/addMovie">Add Movie</Link></Button></Col></Row>
+        <Row><Col><Button><Link className="link" to="/addMovie">Add Movie</Link></Button></Col></Row>
         <Row className="mt-2">
             <Col>
                 {
@@ -43,6 +44,7 @@ export const MoviesComponent = ({movies, getMovies}) => {
                                     <Col>{movie.release_year}</Col>
                                     <Col>{movie.language}</Col>
                                     <Col>{movie.rating}</Col>
+                                    <Col><Button className="btn btn-success"><Link className="link" to={`/updateMovie/${movie.id}`}>Update</Link></Button></Col>
                                     <Col><Button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</Button></Col>
                                 </Row>                               
                             </div>
