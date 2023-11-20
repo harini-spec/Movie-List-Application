@@ -24,14 +24,13 @@ export const UpdateMovieComponent = () => {
     }
 
     useEffect(() =>{
-        getMovie();
+        getMovieById();
     }, [])
 
-    const getMovie = async () => {
+    const getMovieById = async () => {
         try{
             const response = await api.get(`api/v1/movies/${id}`);
             setMovie(response.data);
-            console.log(id);
         }
         catch(err){
             console.log(err);
@@ -46,16 +45,16 @@ export const UpdateMovieComponent = () => {
 
   return (
     <div>
-    <div className='container'>
-    <br></br>
-        <div className='row'>
-            <div className='card col-md-6 offset-md-3 offset-md-3'>
-            <br></br>
-                <h3 className='text-center'>Movie Details</h3>
+        <div className='container'>
+            <br/>
+            <div className='row'>
+                <div className='card col-md-6 offset-md-3 offset-md-3'>
+                    <br/>
+                    <h3 className='text-center'>Update Movie Details</h3>
                     <div className='card-body'>
                         <form onSubmit={(e) => onSubmit(e)}>
                             <div className='form-group'>
-                                <input type={"text"} placeholder="Movie Name" name="name" className='form-control' value={name}
+                                <input placeholder="Movie Name" name="name" className='form-control' value={name}
                                 onChange={(e)=>onInputChange(e)}/>
                             </div><br/>
 
@@ -82,8 +81,8 @@ export const UpdateMovieComponent = () => {
                             <button className='btn btn-primary'>Update</button>
                         </form>
                     </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>  )
-}
+    </div>  
+)}

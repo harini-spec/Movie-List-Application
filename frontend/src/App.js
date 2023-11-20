@@ -1,13 +1,12 @@
-import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import Header from './Components/Header';
-import { Route, Routes } from 'react-router';
-import { MoviesComponent } from './Components/MoviesComponent';
 import { useState, useEffect } from 'react';
 import api from './Services/Axios';
+import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
+import Header from './Components/Header';
+import { MoviesComponent } from './Components/MoviesComponent';
 import { AddMovieComponent } from './Components/AddMovieComponent';
 import { UpdateMovieComponent } from './Components/UpdateMovieComponent';
-import { FilterComponent } from './Components/FilterComponent';
 
 function App() {
 
@@ -31,7 +30,6 @@ function App() {
           <Route path="/" element={<MoviesComponent movies={movies} getMovies={getMovies} setMovies={setMovies}/>}/>
           <Route path="/addMovie" element={<AddMovieComponent/>}/>
           <Route path = "/updateMovie/:id" element={<UpdateMovieComponent/>}/>
-          {/* <Route path = "/filter" element={<FilterComponent movies={movies} getMovies={getMovies} setMovies={setMovies}/>} /> */}
         </Routes>
       </BrowserRouter>
     </div>

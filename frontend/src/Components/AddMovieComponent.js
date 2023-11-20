@@ -23,20 +23,20 @@ export const AddMovieComponent = () => {
         e.preventDefault();
         const response = await api.post("/api/v1/movies", movie);
         Navigate("/");
-    } 
+    }
 
   return (
     <div>
-    <div className='container'>
-    <br></br>
-        <div className='row'>
-            <div className='card col-md-6 offset-md-3 offset-md-3'>
-            <br></br>
-                <h3 className='text-center'>Movie Details</h3>
+        <div className='container'>
+            <br/>
+            <div className='row'>
+                <div className='card col-md-6 offset-md-3 offset-md-3'>
+                    <br/>
+                    <h3 className='text-center'>Movie Details</h3>
                     <div className='card-body'>
                         <form onSubmit={(e) => onSubmit(e)}>
                             <div className='form-group'>
-                                <input type={"text"} placeholder="Movie Name" name="name" className='form-control' 
+                                <input placeholder="Movie Name" name="name" className='form-control' 
                                 onChange={(e)=>onInputChange(e)}/>
                             </div><br/>
 
@@ -63,8 +63,8 @@ export const AddMovieComponent = () => {
                             <button className='btn btn-primary'>Add</button>
                         </form>
                     </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>  )
-}
+    </div>  
+)}

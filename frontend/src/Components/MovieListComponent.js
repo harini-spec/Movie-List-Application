@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from '../Services/Axios';
 
 
@@ -18,7 +18,6 @@ export const MovieListComponent = ({movies, getMovies}) => {
 
   return (
     <Container>
-            <Row><Col><hr /></Col></Row>
             <Row>
                 <Col><h4>NAME</h4></Col>
                 <Col><h4>DIRECTOR</h4></Col>
@@ -42,11 +41,13 @@ export const MovieListComponent = ({movies, getMovies}) => {
                                     <Col>{movie.rating}</Col>
                                 </Row>
                                 <Row>
-                                    <Col><Button className="btn btn-success"><Link className="link" to={`/updateMovie/${movie.id}`}>Update</Link></Button>
-                                    <Button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</Button></Col>
+                                    <Col>
+                                        <Button className="btn btn-success"><Link className="link" to={`/updateMovie/${movie.id}`}>Update</Link></Button>
+                                        <Button className="btn btn-danger" onClick={() => deleteMovie(movie.id)}>Delete</Button>
+                                    </Col>
                                 </Row>   
                                 <Row>
-                                <Col><hr /></Col>
+                                    <Col><hr /></Col>
                                 </Row>                            
                             </div>
                         )
